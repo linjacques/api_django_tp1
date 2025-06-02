@@ -41,3 +41,24 @@ def get_most_expensive_product(request):
             "description": produit.description,
         }
     return JsonResponse(data)
+
+@csrf_exempt
+def add_product(request):
+    data = json.loads(request.body)
+    name = data.get("name")
+    price = data.get("price")
+    description = data.get("description", "")
+    product = Product.objects.create(
+        name=name,
+        price=price,
+        description=description
+    )
+
+    return JsonResponse({
+        "id": product.id,
+        "name": product.name,
+        "price": str(product.price),
+        "description": product.description,
+        "created_at": product.created_at.isoformat(),
+        "updated_at": product.updated_at.isoformat()
+    }, status=201)
