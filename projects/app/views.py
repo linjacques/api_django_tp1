@@ -2,6 +2,8 @@ from django.shortcuts import render
 import json 
 from django.http import JsonResponse 
 from django.views.decorators.csrf import csrf_exempt 
+from .models import Product
+
 def test_json_view(request): 
  data = { 
  'name': 'John Doe', 
@@ -25,3 +27,6 @@ def post_json_view(request):
             "location": "New York",
             "is_active": True
         })
+def get_all_products(request):
+        produits = Product.objects.all().values()
+        return JsonResponse(list(produits), safe=False)
