@@ -27,6 +27,17 @@ def post_json_view(request):
             "location": "New York",
             "is_active": True
         })
+
 def get_all_products(request):
         produits = Product.objects.all().values()
         return JsonResponse(list(produits), safe=False)
+
+def get_most_expensive_product(request):
+    produit = Product.objects.order_by('-price').first()
+    data = {
+            "id": produit.id,
+            "name": produit.name,
+            "price": produit.price,
+            "description": produit.description,
+        }
+    return JsonResponse(data)
