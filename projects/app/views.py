@@ -62,3 +62,33 @@ def add_product(request):
         "created_at": product.created_at.isoformat(),
         "updated_at": product.updated_at.isoformat()
     }, status=201)
+
+@csrf_exempt
+def update_product(request, product_id):
+    data = json.loads(request.body)
+    try:
+        product = Product.objects.get(id=product_id)
+    except Product.DoesNotExist:
+        return JsonResponse({"error": "Produit non trouvé."}, status=404)
+
+    name = data.get("name")
+    price = data.get("price")
+    description = data.get("description")
+
+    if name:
+        product.name = name
+    if price:
+        product.price = price
+    if description is not None:
+        product.description = description
+
+    product.save()
+
+    return JsonResponse({
+        "id": product.id,
+        "name": product.name,
+        "price": str(product.price),
+        "description": product.description,
+        "created_at": product.created_at.isoformat(),
+        "updated_at": product.updated_at.isoformat()
+    })

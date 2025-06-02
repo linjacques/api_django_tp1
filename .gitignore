@@ -1,3 +1,5 @@
 tp1_venv*
 venv*
 env*
+__pychache__/
+*.py[code]
