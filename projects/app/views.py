@@ -3,6 +3,7 @@ import json
 from django.http import JsonResponse 
 from django.views.decorators.csrf import csrf_exempt 
 from .models import Product
+from django.core.paginator import Paginator
 
 def test_json_view(request): 
  data = { 
@@ -91,4 +92,21 @@ def update_product(request, product_id):
         "description": product.description,
         "created_at": product.created_at.isoformat(),
         "updated_at": product.updated_at.isoformat()
+    })
+
+def paged_products(request):
+    page_number = int(request.GET.get("page", 1))
+    produits = Product.objects.all().order_by("id")
+    paginator = Paginator(produits, 3)  # 3 produits par page
+
+    if page_number > paginator.num_pages or page_number < 1:
+        return JsonResponse({"error": "Page invalide."}, status=404)
+
+    page_obj = paginator.get_page(page_number)
+
+    data = list(page_obj.object_list.values())
+    return JsonResponse({
+        "page": page_number,
+        "total_pages": paginator.num_pages,
+        "results": data
     })
