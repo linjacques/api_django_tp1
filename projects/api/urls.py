@@ -22,5 +22,5 @@ urlpatterns = [
     path('test/', include("app.url")),
     path('user/', include("app.url")),
     path('products/', include("app.url")),
-    path('auth/', include("tp_api_2.url"))
+    path('app2/', include("tp_api_2.url"))
 ]
