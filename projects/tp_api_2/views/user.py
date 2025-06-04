@@ -4,6 +4,7 @@ from rest_framework.authtoken.models import Token
 from django.contrib.auth import authenticate
 from rest_framework import status
 from ..models.user import User
+from ..middleware.token import check_token
 import json
 
 @csrf_exempt
@@ -34,3 +35,10 @@ def login_user(request):
         return JsonResponse({"token": token.key})
     else:
         return JsonResponse({"error": "Identifiants invalides"}, status=status.HTTP_401_UNAUTHORIZED)
+    
+def profile(request):
+    user, error = check_token(request)
+    if error:
+        return error
+
+    return JsonResponse({"id": user.id, "username": user.username})
