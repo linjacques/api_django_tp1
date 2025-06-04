@@ -2,21 +2,19 @@ import os
 import json
 from django.http import JsonResponse
 from django.views.decorators.http import require_GET
+from ..middleware.token import check_token
 
-# Répertoire contenant les fichiers JSON
 data_dir = r"C:\Users\jacqu\Documents\Efrei\M1_2024_2025\data_integration1.5\TP_DataLake_DataWarehouse\datalake\transaction_log\2025-04-28"
 
-# Filtres d’égalité (sensibles à la casse mais insensibilisés ici)
 filters_eq = ['payment_method', 'country', 'product_category', 'status']
 
-# Filtres numériques avec types
 filters_num = {
     'amount': float,
     'customer_rating': float
 }
 
 def passes_filters(item, request):
-    # Égalité (str, insensible à la casse)
+    
     for key in filters_eq:
         val = request.GET.get(key)
         if val:
@@ -28,7 +26,6 @@ def passes_filters(item, request):
                 if val.lower() != str(item.get(key, "")).lower():
                     return False
 
-    # Numériques : gt, lt, eq
     for key, caster in filters_num.items():
         for suffix, op in [('gt', lambda a, b: a > b),
                            ('lt', lambda a, b: a < b),
@@ -47,6 +44,10 @@ def passes_filters(item, request):
 
 @require_GET
 def filtered_transactions(request):
+    user, error = check_token(request)
+    if error:
+        return error
+
     results = []
 
     for filename in os.listdir(data_dir):
