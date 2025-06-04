@@ -2,7 +2,7 @@ import os
 import json
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
-from ..middleware.token import check_token  # assure-toi que le chemin est correct
+from ..middleware.token import check_token
 
 @csrf_exempt
 def retrieve_all(request):
