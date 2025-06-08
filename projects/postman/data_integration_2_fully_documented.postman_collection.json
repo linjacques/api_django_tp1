@@ -1,0 +1,596 @@
+{
+  "info": {
+    "_postman_id": "9bc14b5e-5718-4019-8035-90b3e935f310",
+    "name": "data_integration_2",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "24851922"
+  },
+  "item": [
+    {
+      "name": "TP_API_1",
+      "item": [
+        {
+          "name": "Read",
+          "item": [
+            {
+              "name": "User",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://127.0.0.1:8000/test/test_json_view",
+                  "protocol": "http",
+                  "host": [
+                    "127",
+                    "0",
+                    "0",
+                    "1"
+                  ],
+                  "port": "8000",
+                  "path": [
+                    "test",
+                    "test_json_view"
+                  ]
+                },
+                "description": "### User\n**Description**: R\u00e9cup\u00e8re un exemple de JSON utilisateur de test.\n\n**Input parameters**: None\n\n**Output (example)**:\n```json\n{\n  \"name\": \"test\"\n}\n```\n"
+              },
+              "response": []
+            },
+            {
+              "name": "Products",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://127.0.0.1:8000/products/get_all_products",
+                  "protocol": "http",
+                  "host": [
+                    "127",
+                    "0",
+                    "0",
+                    "1"
+                  ],
+                  "port": "8000",
+                  "path": [
+                    "products",
+                    "get_all_products"
+                  ]
+                },
+                "description": "### Products\n**Description**: R\u00e9cup\u00e8re tous les produits disponibles.\n\n**Input parameters**: None\n\n**Output (example)**:\n```json\n[\n  {\n    \"id\": 1,\n    \"name\": \"Product A\",\n    \"price\": 100,\n    \"description\": \"...\"\n  }\n]\n```\n"
+              },
+              "response": []
+            },
+            {
+              "name": "ProductByHighestPrice",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://127.0.0.1:8000/products/expensive_product",
+                  "protocol": "http",
+                  "host": [
+                    "127",
+                    "0",
+                    "0",
+                    "1"
+                  ],
+                  "port": "8000",
+                  "path": [
+                    "products",
+                    "expensive_product"
+                  ]
+                },
+                "description": "### ProductByHighestPrice\n**Description**: R\u00e9cup\u00e8re le produit avec le prix le plus \u00e9lev\u00e9.\n\n**Input parameters**: None\n\n**Output (example)**:\n```json\n{\n  \"id\": 3,\n  \"name\": \"Luxury Item\",\n  \"price\": 999\n}\n```\n"
+              },
+              "response": []
+            },
+            {
+              "name": "PagedProduct",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://127.0.0.1:8000/products/paged_product",
+                  "protocol": "http",
+                  "host": [
+                    "127",
+                    "0",
+                    "0",
+                    "1"
+                  ],
+                  "port": "8000",
+                  "path": [
+                    "products",
+                    "paged_product"
+                  ]
+                },
+                "description": "### PagedProduct\n**Description**: R\u00e9cup\u00e8re une page de produits (pagination).\n\n**Input parameters**:\n```json\n{\n  \"page\": \"number (optional)\"\n}\n```\n\n**Output (example)**:\n```json\n{\n  \"count\": 100,\n  \"results\": []\n}\n```\n"
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "Create",
+          "item": [
+            {
+              "name": "User",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"name\": \"test\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://127.0.0.1:8000/user/post_json_view",
+                  "protocol": "http",
+                  "host": [
+                    "127",
+                    "0",
+                    "0",
+                    "1"
+                  ],
+                  "port": "8000",
+                  "path": [
+                    "user",
+                    "post_json_view"
+                  ]
+                },
+                "description": "### User\n**Description**: Cr\u00e9e un utilisateur avec un nom.\n\n**Input parameters**:\n```json\n{\n  \"name\": \"test\"\n}\n```\n\n**Output (example)**:\n```json\n{\n  \"status\": \"created\"\n}\n```\n"
+              },
+              "response": []
+            },
+            {
+              "name": "Product",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"name\": \"{{$randomBankAccountName}}\",\r\n    \"price\": \"{{$randomInt}}\",\r\n    \"description\":\"{{$randomLoremParagraph}}\"\r\n         \r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://127.0.0.1:8000/products/add_product",
+                  "protocol": "http",
+                  "host": [
+                    "127",
+                    "0",
+                    "0",
+                    "1"
+                  ],
+                  "port": "8000",
+                  "path": [
+                    "products",
+                    "add_product"
+                  ]
+                },
+                "description": "### Product\n**Description**: Ajoute un nouveau produit.\n\n**Input parameters**:\n```json\n{\n  \"name\": \"Product Name\",\n  \"price\": 100,\n  \"description\": \"Description\"\n}\n```\n\n**Output (example)**:\n```json\n{\n  \"status\": \"created\",\n  \"id\": 1\n}\n```\n"
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "Update",
+          "item": [
+            {
+              "name": "Product",
+              "request": {
+                "method": "PUT",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"name\": \"maj\",\r\n    \"price\": \"999\",\r\n    \"description\": \"maj\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://127.0.0.1:8000/products/update_product/12",
+                  "protocol": "http",
+                  "host": [
+                    "127",
+                    "0",
+                    "0",
+                    "1"
+                  ],
+                  "port": "8000",
+                  "path": [
+                    "products",
+                    "update_product",
+                    "12"
+                  ]
+                },
+                "description": "### Product\n**Description**: Met \u00e0 jour un produit existant via son ID.\n\n**Input parameters**:\n```json\n{\n  \"name\": \"maj\",\n  \"price\": \"999\",\n  \"description\": \"maj\"\n}\n```\n\n**Output (example)**:\n```json\n{\n  \"status\": \"updated\"\n}\n```\n"
+              },
+              "response": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "TP_API_2",
+      "item": [
+        {
+          "name": "Create",
+          "item": [
+            {
+              "name": "User",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"username\": \"test5\",\r\n    \"password\": \"123\",\r\n    \"email\": \"test5@gmail.com\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://127.0.0.1:8000/app2/register/",
+                  "protocol": "http",
+                  "host": [
+                    "127",
+                    "0",
+                    "0",
+                    "1"
+                  ],
+                  "port": "8000",
+                  "path": [
+                    "app2",
+                    "register",
+                    ""
+                  ]
+                },
+                "description": "### User\n**Description**: Cr\u00e9e un utilisateur avec un nom.\n\n**Input parameters**:\n```json\n{\n  \"name\": \"test\"\n}\n```\n\n**Output (example)**:\n```json\n{\n  \"status\": \"created\"\n}\n```\n"
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "Auth",
+          "item": [
+            {
+              "name": "login",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"username\": \"test4\",  \r\n  \"password\": \"123\"\r\n}   ",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://127.0.0.1:8000/app2/login/",
+                  "protocol": "http",
+                  "host": [
+                    "127",
+                    "0",
+                    "0",
+                    "1"
+                  ],
+                  "port": "8000",
+                  "path": [
+                    "app2",
+                    "login",
+                    ""
+                  ]
+                },
+                "description": "### login\n**Description**: Authentifie un utilisateur et retourne un token.\n\n**Input parameters**:\n```json\n{\n  \"username\": \"string\",\n  \"password\": \"string\"\n}\n```\n\n**Output (example)**:\n```json\n{\n  \"token\": \"abcd1234...\"\n}\n```\n"
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "Read",
+          "item": [
+            {
+              "name": "Profile",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Token 5baf23863c2f88122ba7a04838c1f49c6ed97c5b",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"username\": \"test4\",  \r\n  \"password\": \"123\"\r\n}   "
+                },
+                "url": {
+                  "raw": "http://127.0.0.1:8000/app2/profile/",
+                  "protocol": "http",
+                  "host": [
+                    "127",
+                    "0",
+                    "0",
+                    "1"
+                  ],
+                  "port": "8000",
+                  "path": [
+                    "app2",
+                    "profile",
+                    ""
+                  ]
+                },
+                "description": "### Profile\n**Description**: Retourne le profil de l'utilisateur authentifi\u00e9.\n\n**Input parameters**:\n```json\n{\n  \"Authorization\": \"Token <token>\"\n}\n```\n\n**Output (example)**:\n```json\n{\n  \"username\": \"test4\",\n  \"email\": \"test4@gmail.com\"\n}\n```\n"
+              },
+              "response": []
+            },
+            {
+              "name": "retrieveAll",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Token 5baf23863c2f88122ba7a04838c1f49c6ed97c5b",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "http://127.0.0.1:8000/app2/datalake/?page=6",
+                  "protocol": "http",
+                  "host": [
+                    "127",
+                    "0",
+                    "0",
+                    "1"
+                  ],
+                  "port": "8000",
+                  "path": [
+                    "app2",
+                    "datalake",
+                    ""
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "6"
+                    }
+                  ]
+                },
+                "description": "### retrieveAll\n**Description**: Retourne toutes les donn\u00e9es (avec pagination).\n\n**Input parameters**:\n```json\n{\n  \"Authorization\": \"Token <token>\",\n  \"page\": \"number\"\n}\n```\n\n**Output (example)**:\n```json\n{\n  \"count\": 100,\n  \"results\": []\n}\n```\n"
+              },
+              "response": []
+            },
+            {
+              "name": "projection",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Token 5baf23863c2f88122ba7a04838c1f49c6ed97c5b",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "http://127.0.0.1:8000/app2/datalake/?page=1&fields=location",
+                  "protocol": "http",
+                  "host": [
+                    "127",
+                    "0",
+                    "0",
+                    "1"
+                  ],
+                  "port": "8000",
+                  "path": [
+                    "app2",
+                    "datalake",
+                    ""
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "location"
+                    }
+                  ]
+                },
+                "description": "### projection\n**Description**: Retourne uniquement certains champs s\u00e9lectionn\u00e9s.\n\n**Input parameters**:\n```json\n{\n  \"Authorization\": \"Token <token>\",\n  \"fields\": \"string\"\n}\n```\n\n**Output (example)**:\n```json\n[\n  {\n    \"location\": \"Paris\"\n  }\n]\n```\n"
+              },
+              "response": []
+            },
+            {
+              "name": "filter",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Token 5baf23863c2f88122ba7a04838c1f49c6ed97c5b",
+                    "type": "text"
+                  },
+                  {
+                    "key": "",
+                    "value": "",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "http://127.0.0.1:8000/app2/filter/?country=France&amount__gt=100&customer_rating__lt=4.5\n",
+                  "protocol": "http",
+                  "host": [
+                    "127",
+                    "0",
+                    "0",
+                    "1"
+                  ],
+                  "port": "8000",
+                  "path": [
+                    "app2",
+                    "filter",
+                    ""
+                  ],
+                  "query": [
+                    {
+                      "key": "country",
+                      "value": "France"
+                    },
+                    {
+                      "key": "amount__gt",
+                      "value": "100"
+                    },
+                    {
+                      "key": "customer_rating__lt",
+                      "value": "4.5\n"
+                    }
+                  ]
+                },
+                "description": "### filter\n**Description**: Filtre les donn\u00e9es selon des crit\u00e8res dynamiques.\n\n**Input parameters**:\n```json\n{\n  \"country\": \"France\",\n  \"amount__gt\": \"100\",\n  \"customer_rating__lt\": \"4.5\"\n}\n```\n\n**Output (example)**:\n```json\n[\n  {\n    \"country\": \"France\",\n    \"amount\": 200,\n    \"customer_rating\": 4.0\n  }\n]\n```\n"
+              },
+              "response": []
+            },
+            {
+              "name": "top_products",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "description": "### top_products\n**Description**: Retourne les produits les plus populaires.\n\n**Input parameters**: None\n\n**Output (example)**:\n```json\n[\n  {\n    \"name\": \"BestProduct\",\n    \"sales\": 500\n  }\n]\n```\n"
+              },
+              "response": []
+            },
+            {
+              "name": "total_per_user_type",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Token 5baf23863c2f88122ba7a04838c1f49c6ed97c5b",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "http://127.0.0.1:8000/app2/total_per_user_type/",
+                  "protocol": "http",
+                  "host": [
+                    "127",
+                    "0",
+                    "0",
+                    "1"
+                  ],
+                  "port": "8000",
+                  "path": [
+                    "app2",
+                    "total_per_user_type",
+                    ""
+                  ]
+                },
+                "description": "### total_per_user_type\n**Description**: Retourne le total agr\u00e9g\u00e9 par type d'utilisateur.\n\n**Input parameters**:\n```json\n{\n  \"Authorization\": \"Token <token>\"\n}\n```\n\n**Output (example)**:\n```json\n{\n  \"client\": 1200,\n  \"admin\": 5400\n}\n```\n"
+              },
+              "response": []
+            },
+            {
+              "name": "money_last_5min",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Token 5baf23863c2f88122ba7a04838c1f49c6ed97c5b",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "http://127.0.0.1:8000/app2/money_last_5min/",
+                  "protocol": "http",
+                  "host": [
+                    "127",
+                    "0",
+                    "0",
+                    "1"
+                  ],
+                  "port": "8000",
+                  "path": [
+                    "app2",
+                    "money_last_5min",
+                    ""
+                  ]
+                },
+                "description": "### money_last_5min\n**Description**: Montant total d\u00e9pens\u00e9 sur les 5 derni\u00e8res minutes.\n\n**Input parameters**:\n```json\n{\n  \"Authorization\": \"Token <token>\"\n}\n```\n\n**Output (example)**:\n```json\n{\n  \"total\": 328.5\n}\n```\n"
+              },
+              "response": []
+            },
+            {
+              "name": "version_data",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Token 5baf23863c2f88122ba7a04838c1f49c6ed97c5b",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "http://127.0.0.1:8000/app2/version?date=2025-04-20",
+                  "protocol": "http",
+                  "host": [
+                    "127",
+                    "0",
+                    "0",
+                    "1"
+                  ],
+                  "port": "8000",
+                  "path": [
+                    "app2",
+                    "version"
+                  ],
+                  "query": [
+                    {
+                      "key": "date",
+                      "value": "2025-04-20"
+                    }
+                  ]
+                },
+                "description": "### version_data\n**Description**: Retourne l'\u00e9tat des donn\u00e9es pour une date donn\u00e9e.\n\n**Input parameters**:\n```json\n{\n  \"Authorization\": \"Token <token>\",\n  \"date\": \"YYYY-MM-DD\"\n}\n```\n\n**Output (example)**:\n```json\n{\n  \"version\": \"1.2\",\n  \"date\": \"2025-04-20\"\n}\n```\n"
+              },
+              "response": []
+            },
+            {
+              "name": "ressources_listes",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "description": "### ressources_listes\n**Description**: Retourne les ressources disponibles dans le syst\u00e8me.\n\n**Input parameters**: None\n\n**Output (example)**:\n```json\n[\n  {\n    \"resource\": \"Product\"\n  },\n  {\n    \"resource\": \"User\"\n  }\n]\n```\n"
+              },
+              "response": []
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
